@@ -20,7 +20,7 @@ const Index = () => {
         <About />
         <HowItWorks />
         {/* <InfluencerShowcase /> */}
-        <VideoTestimonials />
+        {/* <VideoTestimonials /> */}
         {/* <BehindTheScenes /> */}
         <Stats />
         <CTA />

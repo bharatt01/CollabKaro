@@ -62,15 +62,7 @@ const VideoTestimonials = () => {
                 </div>
 
                 {/* Duration & views */}
-                <div className="flex justify-center gap-4 text-sm font-semibold text-gray-700">
-                  <div className="glass-card px-3 py-1 rounded backdrop-blur-md">
-                    {testimonial.duration}
-                  </div>
-                  <div className="glass-card px-3 py-1 rounded backdrop-blur-md">
-                    {testimonial.views} views
-                  </div>
-                </div>
-
+            
                 {/* Info section */}
                 <div>
                   <h3 className="font-bold text-lg mb-1 text-gray-900">{testimonial.name}</h3>

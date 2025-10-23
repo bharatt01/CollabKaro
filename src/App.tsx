@@ -9,6 +9,7 @@ import Influencers from "./pages/Influencers";
 import ContactforInfluencers from "./pages/ContactForInfluencers";
 import ContactforBrands from "./pages/ContactForBrands.tsx";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -26,7 +27,9 @@ const App = () => (
           <Route path="/contact/brand" element={<ContactforBrands />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+          
         </Routes>
+        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

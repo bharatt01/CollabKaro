@@ -8,10 +8,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navLinks = [
-    { label: "For Influencers", href: "#influencers" },
-    { label: "For Brands", href: "#brands" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Success Stories", href: "#stories" },
+    { label: "For Influencers", href: "influencers" },
+    { label: "For Brands", href: "brands" },
+    { label: "About Us", href: "about" },
+    { label: "Contact", href: "contact" },
   ];
 
   return (
