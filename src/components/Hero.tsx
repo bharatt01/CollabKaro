@@ -4,76 +4,62 @@ import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 gradient-hero opacity-20 animate-gradient-shift" style={{ backgroundSize: '200% 200%' }} />
-      
-      {/* Hero image overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center opacity-10"
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0B0B0F] text-white">
+      {/* Subtle gradient overlay */}
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-[#FF6F61]/30 via-transparent to-[#FFD580]/20"
+      />
+
+      {/* Background image with controlled opacity */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-15"
         style={{ backgroundImage: `url(${heroImage})` }}
       />
 
-      <div className="container mx-auto px-4 z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-8 animate-fade-in-up">
+      {/* Content */}
+      <div className="container mx-auto px-6 z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-12">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full text-sm font-medium">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
+          <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 px-5 py-2 rounded-full text-sm font-semibold backdrop-blur-sm tracking-wide shadow-md">
+            <span className="flex h-3 w-3 rounded-full bg-[#FF6F61]" />
             Connecting Brands with Influencers
           </div>
 
-          {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight">
-            Amplify Your Brand with{" "}
-            <span className="gradient-text animate-pulse-glow">
-              Influencer Power
+          {/* Main Heading */}
+          <h1 className="text-6xl md:text-6xl font-extrabold tracking-wide leading-tight">
+            Elevate Your Brand with{" "}
+            <span className="bg-gradient-to-r from-[#FF6F61] via-[#FFD580] to-[#FF6F61] bg-clip-text text-transparent">
+              Authentic Influence
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            We bridge the gap between influential content creators and forward-thinking brands. 
-            Discover authentic partnerships that drive real results.
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
+            We help brands grow by connecting them with the right creators —
+            building meaningful partnerships that deliver real engagement and trust.
           </p>
 
-          {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button variant="hero" size="lg" className="text-lg px-8 py-6 gap-2">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4">
+            <Button
+              size="lg"
+              className="text-base px-10 py-6 bg-[#FF6F61] hover:bg-[#e7544b] text-white font-semibold rounded-full transition-all shadow-lg hover:shadow-[#FF6F61]/60"
+            >
               Get Started
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="ml-3 h-6 w-6" />
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6 gap-2 group">
-              <Play className="h-5 w-5 group-hover:scale-110 transition-transform" />
-              Watch Demo
+            <Button
+              variant="outline"
+              size="lg"
+              className="text-base px-10 py-6 border-white/30 bg-transparent text-white hover:bg-white/10 rounded-full transition-all font-semibold"
+            >
+              {/* <Play className="mr-3 h-6 w-6" /> */}
+              Connect with Us
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-12 max-w-2xl mx-auto">
-            <div className="space-y-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="text-4xl md:text-5xl font-bold gradient-text">10K+</div>
-              <div className="text-sm text-muted-foreground">Influencers</div>
-            </div>
-            <div className="space-y-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="text-4xl md:text-5xl font-bold gradient-text">500+</div>
-              <div className="text-sm text-muted-foreground">Brands</div>
-            </div>
-            <div className="space-y-2 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <div className="text-4xl md:text-5xl font-bold gradient-text">2M+</div>
-              <div className="text-sm text-muted-foreground">Reach</div>
-            </div>
-          </div>
         </div>
-      </div>
-
-    {/* Scroll indicator (moved to right side) */}
-<div className="absolute bottom-8 right-8 animate-bounce">
-  <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2">
-    <div className="w-1 h-3 bg-primary rounded-full animate-pulse" />
-  </div>
       </div>
     </section>
   );

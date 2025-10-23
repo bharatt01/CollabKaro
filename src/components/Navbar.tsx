@@ -1,77 +1,115 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
-    { label: "For Influencers", href: "influencers" },
+    { label: "For Influencers", href: "#influencers" },
     { label: "For Brands", href: "#brands" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Success Stories", href: "#stories" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-white/70 border-b border-gray-200 shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-              <span className="text-white font-bold text-xl">CK</span>
+          <a href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center shadow-sm">
+              <img
+                src="/Images/logo.png" // <-- replace this with your logo path
+                alt="CollabKaroo Logo"
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
-            <span className="text-xl font-bold gradient-text">
-        CollabKaroo
+            <span className="text-xl font-extrabold text-black tracking-tight">
+              CollabKaroo
             </span>
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((link, index) => (
-              <a 
+              <a
                 key={index}
                 href={link.href}
-                className="text-foreground/80 hover:text-primary font-medium transition-colors relative group"
+                className="relative text-gray-800 hover:text-black font-semibold transition-colors group py-1 px-1"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 gradient-primary group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-1 bg-black group-hover:w-full transition-all duration-300 rounded-full" />
               </a>
             ))}
           </div>
 
-          {/* CTA buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            {/* <Button variant="ghost">Sign In</Button> */}
-            <Button variant="hero">Get Started</Button>
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Button
+              variant="outline"
+              className="border-black text-black hover:bg-black hover:text-white font-semibold transition-all duration-300 shadow-sm"
+              onClick={() => navigate("/contact/brand")}
+            >
+              I'm a Brand
+            </Button>
+            <Button
+              className="bg-black text-white font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+              onClick={() => navigate("/contact/influencer")}
+            >
+              I'm an Influencer
+            </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <button 
+          {/* Mobile Menu Toggle */}
+          <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 hover:bg-accent rounded-lg transition-colors"
+            className="lg:hidden p-2 rounded-md hover:bg-black/10 transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? (
+              <X className="h-6 w-6 text-black" />
+            ) : (
+              <Menu className="h-6 w-6 text-black" />
+            )}
           </button>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden py-6 space-y-4 animate-fade-in">
+          <div className="lg:hidden py-6 space-y-5 animate-fade-in bg-white shadow-md rounded-lg">
             {navLinks.map((link, index) => (
-              <a 
+              <a
                 key={index}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-2 text-foreground/80 hover:text-primary font-medium transition-colors"
+                className="block py-2 text-gray-900 hover:text-black font-semibold transition-colors"
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 space-y-3">
-              <Button variant="ghost" className="w-full">Sign In</Button>
-              <Button variant="hero" className="w-full">Get Started</Button>
+            <div className="pt-6 space-y-4">
+              <Button
+                variant="outline"
+                className="w-full border-black text-black hover:bg-black hover:text-white font-semibold transition-all duration-300 shadow-sm"
+                onClick={() => {
+                  navigate("/contact/brand");
+                  setIsOpen(false);
+                }}
+              >
+                I'm a Brand
+              </Button>
+              <Button
+                className="w-full bg-black text-white font-bold hover:scale-105 transition-all duration-300 shadow-md"
+                onClick={() => {
+                  navigate("/contact/influencer");
+                  setIsOpen(false);
+                }}
+              >
+                I'm an Influencer
+              </Button>
             </div>
           </div>
         )}
