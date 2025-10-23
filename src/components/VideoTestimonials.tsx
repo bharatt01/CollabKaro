@@ -6,22 +6,19 @@ const VideoTestimonials = () => {
       name: "Krishna Sikka",
       role: "Marketing Director, TechCorp",
       quote: "InfluenceHub transformed our influencer marketing strategy completely",
-      duration: "2:15",
-      views: "12K",
+
     },
     {
       name: "Riyan Sharma",
-      role: "Content Creator, 850K Followers",
+      role: "Content Creator, 1M+ Followers",
       quote: "I found my dream brand partnerships within weeks of joining",
-      duration: "1:45",
-      views: "8.5K",
+      
     },
     {
-      name: "Jay Z900",
+      name: "Jay",
       role: "Brand Manager, Fashion Forward",
       quote: "The ROI we achieved exceeded all our expectations",
-      duration: "2:30",
-      views: "15K",
+  
     },
   ];
 
