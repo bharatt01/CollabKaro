@@ -1,7 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
+  const navigate = useNavigate();
+
+  const handleCall = () => {
+    window.location.href = "tel:+919717024896";
+  };
+
   return (
     <section className="py-24 relative overflow-hidden bg-[#FAFAFA]">
       {/* Animated background */}
@@ -44,9 +51,10 @@ const CTA = () => {
 
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
-              <Button
+            <Button
               size="lg"
               className="text-lg px-12 py-7 gap-3 bg-gradient-to-r from-[#E0523D] to-[#FFD580] text-white hover:from-[#C44A35] hover:to-[#D4B66A] shadow-lg flex items-center"
+              onClick={() => navigate("/contact")} // <-- useNavigate here
             >
               Inquire Now
               <ArrowRight className="h-5 w-5 ml-2" />
@@ -56,8 +64,9 @@ const CTA = () => {
               variant="outline"
               size="lg"
               className="text-lg px-12 py-7 gap-3 border-2 border-[#E0523D] text-[#E0523D] hover:bg-[#E0523D]/10 rounded-full transition-all"
+              onClick={handleCall} // <-- useNavigate here
             >
-              <Mail className="h-5 w-5" />
+              <Phone className="h-5 w-5" />
               Talk to Our Experts
             </Button>
           </div>

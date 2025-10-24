@@ -8,10 +8,11 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const navLinks = [
-    { label: "For Influencers", href: "influencers" },
-    { label: "For Brands", href: "brands" },
-    { label: "About Us", href: "about" },
-    { label: "Contact", href: "contact" },
+    { label: "Home", path: "/home" },
+    { label: "For Influencers", path: "/for-influencers" },
+    { label: "For Brands", path: "/for-brands" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact", path: "/contact" },
   ];
 
   return (
@@ -19,10 +20,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3 group">
+          <div
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
             <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center shadow-sm">
               <img
-                src="/Images/logo.png" // <-- replace this with your logo path
+                src="/Images/logo.png"
                 alt="CollabKaroo Logo"
                 className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
               />
@@ -30,19 +34,19 @@ const Navbar = () => {
             <span className="text-xl font-extrabold text-black tracking-tight">
               CollabKaroo
             </span>
-          </a>
+          </div>
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center gap-10">
             {navLinks.map((link, index) => (
-              <a
+              <div
                 key={index}
-                href={link.href}
-                className="relative text-gray-800 hover:text-black font-semibold transition-colors group py-1 px-1"
+                onClick={() => navigate(link.path)}
+                className="relative text-gray-800 hover:text-black font-semibold transition-colors group py-1 px-1 cursor-pointer"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-1 bg-black group-hover:w-full transition-all duration-300 rounded-full" />
-              </a>
+              </div>
             ))}
           </div>
 
@@ -69,27 +73,28 @@ const Navbar = () => {
             className="lg:hidden p-2 rounded-md hover:bg-black/10 transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? (
-              <X className="h-6 w-6 text-black" />
-            ) : (
-              <Menu className="h-6 w-6 text-black" />
-            )}
+            {isOpen ? <X className="h-6 w-6 text-black" /> : <Menu className="h-6 w-6 text-black" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="lg:hidden py-6 space-y-5 animate-fade-in bg-white shadow-md rounded-lg">
+      {/* Mobile Menu - FULL WIDTH */}
+      {isOpen && (
+        <div className="lg:hidden w-full bg-white shadow-md py-6 space-y-5 animate-fade-in">
+          <div className="px-4">
             {navLinks.map((link, index) => (
-              <a
+              <div
                 key={index}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-2 text-gray-900 hover:text-black font-semibold transition-colors"
+                onClick={() => {
+                  navigate(link.path);
+                  setIsOpen(false);
+                }}
+                className="block py-2 text-gray-900 hover:text-black font-semibold transition-colors cursor-pointer"
               >
                 {link.label}
-              </a>
+              </div>
             ))}
+
             <div className="pt-6 space-y-4">
               <Button
                 variant="outline"
@@ -112,8 +117,8 @@ const Navbar = () => {
               </Button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 };

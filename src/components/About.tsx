@@ -1,8 +1,9 @@
 import { Users, Target, TrendingUp, Sparkles } from "lucide-react";
 import { FaInstagram, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
-import connectionGraphic from "@/assets/about.png";
+import { FC } from "react";
+import heroVideo from "../../public/Videos/network.mp4"; // your video file
 
-const About = () => {
+const About: FC = () => {
   const features = [
     {
       icon: Users,
@@ -57,13 +58,22 @@ const About = () => {
         ))}
       </div>
 
+      {/* Background Video */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden rounded-3xl">
+        <video
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          className="w-full h-full object-cover opacity-40"
+        />
+        {/* Overlay for better text visibility */}
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" />
+      </div>
+
       {/* Floating animation styles */}
       <style>
         {`
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
           @keyframes float-slow {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
@@ -79,7 +89,7 @@ const About = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
             The Bridge Between{" "}
-            <span className="bg-gradient-to-r from-[#FF6F61] via-[#FFD580] to-[#FF6F61] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#E0523D] via-[#E0523D to-[#FF6F61] bg-clip-text text-transparent">
               Influence & Impact
             </span>
           </h2>
@@ -89,15 +99,17 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Image with floating label */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Video placeholder area */}
           <div className="relative rounded-3xl overflow-hidden shadow-lg">
-            <img
-              src={connectionGraphic}
-              alt="Network visualization showing brands connecting with influencers"
-              className="w-full h-auto rounded-3xl"
+            <video
+              src={heroVideo}
+              autoPlay
+              loop
+              muted
+              className="w-full h-auto rounded-3xl object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-3xl" />
             <div className="absolute top-4 -right-6 bg-[#FF6F61] p-5 rounded-3xl shadow-lg max-w-[180px] text-center font-bold text-white z-10 float-anim">
               Trusted by Top Brands
             </div>

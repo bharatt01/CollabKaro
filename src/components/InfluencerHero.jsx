@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-
-const influencerHero =
-  "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1920&q=80";
+import influencerVideo from "../../public/Videos/influencers-hero.mp4"; // replace with your video file
 
 export default function InfluencerHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center scale-105"
-        style={{ backgroundImage: `url(${influencerHero})` }}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white rounded-b-3xl">
+      {/* Background Video */}
+      <video
+        src={influencerVideo}
+        autoPlay
+        loop
+        muted
+        className="absolute inset-0 w-full h-full object-cover opacity-40"
       />
 
       {/* Animated Pink Gradient Overlay */}
@@ -55,14 +56,13 @@ export default function InfluencerHero() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
 
-           <Button
-  variant="ghost" // use ghost to remove background override
-  size="lg"
-  className="text-lg px-10 py-6 font-bold text-pink-500 border border-pink-400 hover:text-pink-400 hover:bg-pink-100/10 transition-all duration-300 shadow-md"
->
-  Watch How It Works
-</Button>
-
+            <Button
+              variant="ghost"
+              size="lg"
+              className="text-lg px-10 py-6 font-bold text-pink-500 border border-pink-400 hover:text-pink-400 hover:bg-pink-100/10 transition-all duration-300 shadow-md"
+            >
+              Watch How It Works
+            </Button>
           </div>
         </motion.div>
 
@@ -87,8 +87,6 @@ export default function InfluencerHero() {
           ))}
         </motion.div>
       </div>
-
-    
     </section>
   );
 }
