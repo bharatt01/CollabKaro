@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Users, Sparkles, ArrowRight, Target } from "lucide-react";
 import { FaInstagram, FaYoutube, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { Building2 } from "lucide-react";
 
 const HowItWorks = () => {
   const [activeTab, setActiveTab] = useState("influencer");
@@ -110,6 +111,7 @@ const HowItWorks = () => {
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
+             <Users className="w-14 h-14 mx-auto text-[#FF6F61] mb-4" />
             Influencers
           </button>
           <button
@@ -120,6 +122,7 @@ const HowItWorks = () => {
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
+            <Building2 className="w-14 h-14 mx-auto text-[#FF6F61] mb-4" />
             Brands
           </button>
         </div>

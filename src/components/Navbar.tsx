@@ -60,7 +60,7 @@ const Navbar = () => {
               I'm a Brand
             </Button>
             <Button
-              className="bg-black text-white font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="bg-black text-white font-bold shadow-md hover:bg-[#E0523D]  shadow-lg  scale-105 transition-all duration-300"
               onClick={() => navigate("/contact/influencer")}
             >
               I'm an Influencer
