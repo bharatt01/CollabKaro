@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const animDuration = 15000;
 
@@ -28,46 +31,65 @@ const AnimatedIcon = ({ Icon, style, delay }) => {
 
 const ContactForBrands = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [status, setStatus] = useState("");
+  // const [status, setStatus] = useState("");
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     setAnimate(true);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("Submitting...");
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    if (!formRef.current) return;
+  if (!formRef.current) return;
 
-    const form = formRef.current;
-    const formData = {
-      brandName: (form.elements.namedItem("brandName") as HTMLInputElement).value,
-      industry: (form.elements.namedItem("industry") as HTMLInputElement).value,
-      requirement: (form.elements.namedItem("requirement") as HTMLSelectElement).value,
-      contact: (form.elements.namedItem("contact") as HTMLInputElement).value,
-    };
-
-    try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbzdSr3GE6bR7dwdXeDPZ8dWDEt0jcYFO7HUIOH68vhlrjoqetK10jk4Pi1BYs8ejcUB4Q/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      setStatus("✅ Form submitted successfully!");
-      form.reset();
-    } catch (error) {
-      console.error(error);
-      setStatus("❌ Error submitting form.");
-    }
+  const form = formRef.current;
+  const formData = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    industry: (form.elements.namedItem("industry") as HTMLInputElement).value,
+    requirement: (form.elements.namedItem("requirement") as HTMLSelectElement).value,
+    contact: (form.elements.namedItem("contact") as HTMLInputElement).value,
   };
+
+  // **Toast Notification While Submitting**
+  toast.info("Submitting your details...", {
+    position: "top-right",
+    autoClose: 1400,
+    pauseOnHover: false,
+  });
+
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbyBvHdS6SH690ti9KgTVpsPHJoYcS07xctOTgRIyXBLPoGA2fSPiOTwQhd9KztyxxVcVg/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    // **Success Toast**
+    toast.success("✅ Submitted Successfully!", {
+      position: "top-right",
+      autoClose: 2500,
+      theme: "colored",
+    });
+
+    form.reset();
+  } catch (error) {
+    console.error(error);
+
+    // **Error Toast**
+    toast.error("❌ Something went wrong. Try again.", {
+      position: "top-right",
+      autoClose: 2500,
+      theme: "colored",
+    });
+  }
+};
 
   return (
     <>
@@ -100,7 +122,7 @@ const ContactForBrands = () => {
             <span className="block text-gray-700 font-semibold mb-1">Brand Name</span>
             <input
               type="text"
-              name="brandName"
+              name="name"
               required
               placeholder="Your brand name"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
@@ -155,6 +177,14 @@ const ContactForBrands = () => {
           {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
         </form>
       </section>
+      <ToastContainer
+  position="top-right"
+  autoClose={2500}
+  pauseOnHover={false}
+  newestOnTop={true}
+  theme="light"
+/>
+
       <Footer />
 
       <style>{`

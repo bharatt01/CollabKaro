@@ -2,47 +2,63 @@ import { useState, useRef } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const ContactForInfluencers = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [status, setStatus] = useState("");
+  // const [status, setStatus] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("Submitting...");
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    if (!formRef.current) return;
+  if (!formRef.current) return;
 
-    const form = formRef.current;
-    const formData = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      instagram: (form.elements.namedItem("instagram") as HTMLInputElement).value,
-      followers: (form.elements.namedItem("followers") as HTMLSelectElement).value,
-      niche: (form.elements.namedItem("niche") as HTMLSelectElement).value,
-      contact: (form.elements.namedItem("contact") as HTMLInputElement).value,
-      contract: (form.elements.namedItem("contract") as HTMLSelectElement).value,
-    };
-
-    try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycbydsPIcAlMoROp-SswDmhnMSOCzB342QIhXgaewdsER0dVcSDTS1XAp84IUHVu-C-WIzQ/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      setStatus("✅ Form submitted successfully!");
-      form.reset();
-    } catch (error) {
-      console.error(error);
-      setStatus("❌ Error submitting form.");
-    }
+  const form = formRef.current;
+  const formData = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    instagram: (form.elements.namedItem("instagram") as HTMLInputElement).value,
+    followers: (form.elements.namedItem("followers") as HTMLSelectElement).value,
+    niche: (form.elements.namedItem("niche") as HTMLSelectElement).value,
+    contact: (form.elements.namedItem("contact") as HTMLInputElement).value,
+    contract: (form.elements.namedItem("contract") as HTMLSelectElement).value,
   };
 
+  // Notify while submitting
+  toast.info("Submitting your details...", {
+    position: "top-right",
+    autoClose: 1400,
+    pauseOnHover: false,
+  });
+
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbydsPIcAlMoROp-SswDmhnMSOCzB342QIhXgaewdsER0dVcSDTS1XAp84IUHVu-C-WIzQ/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    toast.success("✅ Submitted Successfully!", {
+      position: "top-right",
+      autoClose: 2500,
+      theme: "colored",
+    });
+
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    toast.error("❌ Something went wrong. Try again.", {
+      position: "top-right",
+      autoClose: 2500,
+      theme: "colored",
+    });
+  }
+};
   return (
     <>
       <Navbar />
@@ -171,6 +187,14 @@ const ContactForInfluencers = () => {
           {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
         </form>
       </section>
+      <ToastContainer
+  position="top-right"
+  autoClose={2500}
+  pauseOnHover={false}
+  newestOnTop={true}
+  theme="light"
+/>
+
       <Footer />
     </>
   );
