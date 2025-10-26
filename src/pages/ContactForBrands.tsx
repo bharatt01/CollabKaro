@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
@@ -27,141 +27,121 @@ const AnimatedIcon = ({ Icon, style, delay }) => {
 };
 
 const ContactForBrands = () => {
-  const [formData, setFormData] = useState({
-    companyName: "",
-    contactPerson: "",
-    email: "",
-    marketingGoal: "",
-    message: "",
-  });
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [status, setStatus] = useState("");
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     setAnimate(true);
   }, []);
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Thank you for contacting us! We will reach out to you soon.");
+    setStatus("Submitting...");
+
+    if (!formRef.current) return;
+
+    const form = formRef.current;
+    const formData = {
+      brandName: (form.elements.namedItem("brandName") as HTMLInputElement).value,
+      industry: (form.elements.namedItem("industry") as HTMLInputElement).value,
+      requirement: (form.elements.namedItem("requirement") as HTMLSelectElement).value,
+      contact: (form.elements.namedItem("contact") as HTMLInputElement).value,
+    };
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzdSr3GE6bR7dwdXeDPZ8dWDEt0jcYFO7HUIOH68vhlrjoqetK10jk4Pi1BYs8ejcUB4Q/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      setStatus("✅ Form submitted successfully!");
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      setStatus("❌ Error submitting form.");
+    }
   };
 
   return (
     <>
       <Navbar />
       <section className="relative py-24 bg-[#FAFAFA] min-h-screen flex flex-col items-center overflow-hidden">
-        {/* Animated social media icons moving around */}
-        <AnimatedIcon
-          Icon={Instagram}
-          delay="0ms"
-          style={{ top: 40, left: 20, animationDirection: "alternate" }}
-        />
-        <AnimatedIcon
-          Icon={Twitter}
-          delay="3000ms"
-          style={{ top: 120, right: 40, animationDirection: "alternate-reverse" }}
-        />
-        <AnimatedIcon
-          Icon={Linkedin}
-          delay="6000ms"
-          style={{ bottom: 80, left: 30, animationDirection: "alternate" }}
-        />
-        <AnimatedIcon
-          Icon={Youtube}
-          delay="9000ms"
-          style={{ bottom: 50, right: 20, animationDirection: "alternate-reverse" }}
-        />
+        {/* Animated social media icons */}
+        <AnimatedIcon Icon={Instagram} delay="0ms" style={{ top: 40, left: 20, animationDirection: "alternate" }} />
+        <AnimatedIcon Icon={Twitter} delay="3000ms" style={{ top: 120, right: 40, animationDirection: "alternate-reverse" }} />
+        <AnimatedIcon Icon={Linkedin} delay="6000ms" style={{ bottom: 80, left: 30, animationDirection: "alternate" }} />
+        <AnimatedIcon Icon={Youtube} delay="9000ms" style={{ bottom: 50, right: 20, animationDirection: "alternate-reverse" }} />
 
-        <h1
-          className={`text-4xl font-extrabold mb-6 text-center transition-transform duration-700 ease-out ${
-            animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
-        >
+        <h1 className={`text-4xl font-extrabold mb-6 text-center transition-transform duration-700 ease-out ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           Contact Us <br />
           <span className="bg-gradient-to-r from-[#E0523D] to-[#FFD580] bg-clip-text text-transparent">
             for Brands
           </span>
         </h1>
 
-        <p
-          className={`max-w-xl text-center mb-10 text-gray-700 px-6 transition-opacity duration-700 ease-out ${
-            animate ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          Looking for authentic influencer marketing solutions? Reach out to us by filling the form below and begin your brand’s growth journey.
+        <p className={`max-w-xl text-center mb-10 text-gray-700 px-6 transition-opacity duration-700 ease-out ${animate ? "opacity-100" : "opacity-0"}`}>
+          Reach out to us by filling the form below and start your brand’s growth journey.
         </p>
 
         <form
+          ref={formRef}
           className="w-full max-w-md bg-white rounded-xl p-8 shadow-lg relative z-10"
           onSubmit={handleSubmit}
           autoComplete="off"
         >
           <label className="block mb-5">
-            <span className="block text-gray-700 font-semibold mb-1">Company Name</span>
+            <span className="block text-gray-700 font-semibold mb-1">Brand Name</span>
             <input
               type="text"
-              name="companyName"
+              name="brandName"
               required
-              value={formData.companyName}
-              onChange={handleChange}
+              placeholder="Your brand name"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
-              placeholder="Your company name"
             />
           </label>
 
           <label className="block mb-5">
-            <span className="block text-gray-700 font-semibold mb-1">Contact Person</span>
+            <span className="block text-gray-700 font-semibold mb-1">Industry</span>
             <input
               type="text"
-              name="contactPerson"
+              name="industry"
               required
-              value={formData.contactPerson}
-              onChange={handleChange}
+              placeholder="Industry/sector"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
-              placeholder="Name of the contact person"
             />
           </label>
 
           <label className="block mb-5">
-            <span className="block text-gray-700 font-semibold mb-1">Email</span>
-            <input
-              type="email"
-              name="email"
+            <span className="block text-gray-700 font-semibold mb-1">Requirement</span>
+            <select
+              name="requirement"
               required
-              value={formData.email}
-              onChange={handleChange}
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
-              placeholder="Email address"
-            />
-          </label>
-
-          <label className="block mb-5">
-            <span className="block text-gray-700 font-semibold mb-1">Marketing Goal</span>
-            <input
-              type="text"
-              name="marketingGoal"
-              value={formData.marketingGoal}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
-              placeholder="Brand awareness, engagement, sales, etc."
-            />
+            >
+              <option value="" disabled selected>Select your requirement</option>
+              <option value="Brand Awareness">Brand Awareness</option>
+              <option value="Influencer Marketing">Influencer Marketing</option>
+              <option value="Sales Campaign">Sales Campaign</option>
+              <option value="Content Creation">Content Creation</option>
+              <option value="Other">Other</option>
+            </select>
           </label>
 
           <label className="block mb-8">
-            <span className="block text-gray-700 font-semibold mb-1">Message</span>
-            <textarea
-              name="message"
-              rows="4"
-              value={formData.message}
-              onChange={handleChange}
+            <span className="block text-gray-700 font-semibold mb-1">Contact Info</span>
+            <input
+              type="text"
+              name="contact"
+              required
+              placeholder="Email or phone number"
               className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#E0523D] focus:outline-none transition"
-              placeholder="Additional information or questions"
             />
           </label>
 
@@ -171,6 +151,8 @@ const ContactForBrands = () => {
           >
             Submit
           </button>
+
+          {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
         </form>
       </section>
       <Footer />
