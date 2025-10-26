@@ -6,7 +6,7 @@ const CTA = () => {
   const navigate = useNavigate();
 
   const handleCall = () => {
-    window.location.href = "tel:+9196432424844";
+    window.location.href = "tel:+919643424844";
   };
 
   return (
