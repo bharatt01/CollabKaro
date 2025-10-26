@@ -9,7 +9,7 @@ const Hero = () => {
   // Function to call when Get Started is clicked
   const handleCall = () => {
    
-      window.location.href = "tel:+9196432424844";
+      window.location.href = "tel:+919643424844";
 
     // Then navigate to your desired route
     // navigate("/get-started");
