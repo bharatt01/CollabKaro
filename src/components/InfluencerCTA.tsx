@@ -1,6 +1,13 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 const InfluencerCTA: FC = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/contact/influencer");
+  };
+
   return (
     <section className="relative py-24 bg-gradient-to-tr from-[#E0523D]/20 via-[#FFD580]/20 to-[#E0523D]/20 overflow-hidden">
       <div className="absolute top-0 left-0 w-72 h-72 rounded-full bg-[#FFD580]/30 blur-3xl animate-blob"></div>
@@ -13,12 +20,12 @@ const InfluencerCTA: FC = () => {
         <p className="text-gray-700 mb-10 text-lg md:text-xl max-w-2xl mx-auto">
           Join CollabKaro today and start working with brands that match your style and influence.
         </p>
-        <a
-          href="/contact/influencer"
+        <button
+          onClick={handleClick}
           className="inline-block px-10 py-5 bg-gradient-to-r from-[#E0523D] to-[#FFD580] text-white font-bold rounded-full shadow-lg hover:scale-105 transition-transform"
         >
           Get Started Now
-        </a>
+        </button>
       </div>
     </section>
   );

@@ -1,6 +1,13 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BrandFinalCTA: FC = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/contact/brand");
+  };
+
   return (
     <section className="relative py-28 bg-gradient-to-tr from-[#E0523D]/25 via-[#FFD580]/25 to-[#E0523D]/25 overflow-hidden flex flex-col justify-center items-center text-center px-6">
       {/* Dynamic colorful blurred blobs */}
@@ -15,13 +22,13 @@ const BrandFinalCTA: FC = () => {
         <p className="text-gray-700 mb-12 text-xl max-w-xl mx-auto leading-relaxed">
           Collaborate with the right influencers, amplify your brand, and achieve measurable results.
         </p>
-        <a
-          href="/contact/brand"
+        <button
+          onClick={handleClick}
           className="inline-block bg-gradient-to-r from-[#E0523D] via-[#FFB347] to-[#FFD580] text-white font-extrabold px-16 py-5 rounded-full shadow-2xl hover:scale-110 hover:shadow-yellow-400/60 transition-transform duration-300"
           aria-label="Get Started with Brand Campaign"
         >
           Get Started
-        </a>
+        </button>
       </div>
     </section>
   );
