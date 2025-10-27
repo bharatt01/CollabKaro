@@ -33,21 +33,21 @@ jobs:
       - name: 🧹 Clean old files on server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          port: 65002
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           script: |
-            rm -rf /home/${{ secrets.HOSTINGER_USER }}/domains/collabkaroo.in/public_html/*
+            rm -rf /home/${{ secrets.SSH_USERNAME }}/domains/collabkaroo.in/public_html/*
 
       # Deploy only the contents of build folder
       - name: 📤 Deploy to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.4
         with:
-          host: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          port: 65002
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           source: "build/"    # the folder itself
-          target: "/home/${{ secrets.HOSTINGER_USER }}/domains/collabkaroo.in/public_html/"
+          target: "/home/${{ secrets.SSH_USERNAME }}/domains/collabkaroo.in/public_html/"
           strip_components: 1 # removes the top-level 'build' folder
