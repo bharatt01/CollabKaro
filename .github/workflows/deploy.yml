@@ -48,6 +48,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "build/"    # the folder itself
+          source: "dist/"    # the folder itself
           target: "/home/${{ secrets.SSH_USERNAME }}/domains/collabkaroo.in/public_html/"
           strip_components: 1 # removes the top-level 'build' folder
