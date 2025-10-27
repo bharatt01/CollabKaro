@@ -41,8 +41,8 @@ const Footer = () => {
           <div className="flex flex-col sm:flex-row gap-8 md:gap-12">
             <div className="flex flex-col gap-3">
               <h4 className="text-gray-400 uppercase text-xs font-semibold">Platform</h4>
-              <span onClick={() => navigate("/influencers")} className={linkClass}>For Influencers</span>
-              <span onClick={() => navigate("/brands")} className={linkClass}>For Brands</span>
+              <span onClick={() => navigate("/for-influencers")} className={linkClass}>For Influencers</span>
+              <span onClick={() => navigate("/for-brands")} className={linkClass}>For Brands</span>
             </div>
             <div className="flex flex-col gap-3">
               <h4 className="text-gray-400 uppercase text-xs font-semibold">Company</h4>

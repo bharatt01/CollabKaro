@@ -1,9 +1,11 @@
-"use client";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { FC } from "react";
 import heroImage from "../assets/hero-image.jpg"; // replace with your image path
 
 export const AboutHero: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden rounded-b-3xl">
       {/* Background Image */}
@@ -43,20 +45,21 @@ export const AboutHero: FC = () => {
 
         {/* CTA Buttons */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <motion.a
+          <motion.button
             whileHover={{ scale: 1.06 }}
-            href="/for-influencers"
+            onClick={() => navigate("/for-influencers")}
             className="px-8 py-4 bg-gradient-to-r from-[#FF7043] to-[#FFD580] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all"
           >
             For Influencers
-          </motion.a>
-          <motion.a
+          </motion.button>
+
+          <motion.button
             whileHover={{ scale: 1.06 }}
-            href="/for-brands"
+            onClick={() => navigate("/for-brands")}
             className="px-8 py-4 bg-white/90 backdrop-blur-md text-black font-semibold rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all"
           >
             For Brands
-          </motion.a>
+          </motion.button>
         </div>
       </motion.div>
     </section>
