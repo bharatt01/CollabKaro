@@ -2,37 +2,43 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import backgroundVideo from "../../public/Videos/home-hero.mp4";
+import fallbackImage from "../../public/Videos/hero-fallback.webp"; // create a still frame of your video
 
 const Hero = () => {
   const navigate = useNavigate();
 
-  // Function to call when Get Started is clicked
   const handleCall = () => {
-   
-      window.location.href = "tel:+919643424844";
-
-    // Then navigate to your desired route
-    // navigate("/get-started");
+    window.location.href = "tel:+919643424844";
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
-      {/* Background Video */}
+      {/* Background Video (hidden on mobile for performance) */}
       <video
-        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 hidden md:block"
         src={backgroundVideo}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        poster={fallbackImage}
       />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80 pointer-events-none" />
+      {/* Fallback Image for Mobile */}
+      <img
+        src={fallbackImage}
+        alt="CollabKaro Background"
+        className="absolute inset-0 w-full h-full object-cover opacity-40 md:hidden"
+        loading="lazy"
+      />
 
-      {/* Floating Accent Blobs */}
-      <div className="absolute -top-32 -left-20 w-[30rem] h-[30rem] bg-[#FF6F61]/40 blur-[150px] rounded-full" />
-      <div className="absolute bottom-0 right-0 w-[25rem] h-[25rem] bg-[#FFD580]/40 blur-[140px] rounded-full" />
+      {/* Gradient Overlay (simplified for GPU) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/80 pointer-events-none" />
+
+      {/* Floating Accent Blobs (reduced blur for better mobile performance) */}
+      <div className="absolute -top-32 -left-20 w-[25rem] h-[25rem] bg-[#FF6F61]/30 blur-[100px] rounded-full will-change-transform" />
+      <div className="absolute bottom-0 right-0 w-[20rem] h-[20rem] bg-[#FFD580]/30 blur-[90px] rounded-full will-change-transform" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center max-w-5xl space-y-10">
@@ -53,12 +59,12 @@ const Hero = () => {
           We build meaningful partnerships between companies and creators — rooted in authenticity, performance, and trust.
         </p>
 
-        {/* CTA */}
+        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-6 pt-4">
           <Button
             size="lg"
             className="text-base px-10 py-6 bg-[#FF6F61] hover:bg-[#e7544b] text-white font-semibold rounded-full shadow-lg hover:shadow-[#FF6F61]/50 transition-all"
-            onClick={handleCall} // Call the function here
+            onClick={handleCall}
           >
             Get Started <ArrowRight className="ml-3 h-6 w-6" />
           </Button>
