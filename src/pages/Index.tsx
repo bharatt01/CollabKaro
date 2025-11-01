@@ -9,7 +9,7 @@ import BehindTheScenes from "@/components/BehindTheScenes";
 import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-
+import StatsSection from "@/components/StatsSection";
 const Index = () => {
   return (
     <div className="min-h-screen">
@@ -19,6 +19,7 @@ const Index = () => {
         {/* <VideoDemo /> */}
         <About />
         <HowItWorks />
+        <StatsSection />
         {/* <InfluencerShowcase /> */}
         {/* <VideoTestimonials /> */}
         {/* <BehindTheScenes /> */}

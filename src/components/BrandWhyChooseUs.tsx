@@ -23,7 +23,7 @@ const BrandWhyChooseUs: FC = () => {
   return (
     <section className="relative py-20 bg-gradient-to-tr from-[#FFF5E6] via-[#FFEBCD] to-[#FFF9F2] px-6 md:px-20 overflow-hidden">
       <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-[#E0523D] drop-shadow-sm">
-        Why Brands Trust CollabKaro
+        Why Brands Trust CollabKaroo
       </h2>
       <div className="grid md:grid-cols-3 gap-14 max-w-7xl mx-auto">
         {reasons.map((r, idx) => (

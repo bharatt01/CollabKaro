@@ -7,7 +7,7 @@ export const AboutCTA: FC = () => {
   return (
     <section className="py-20 px-6 md:px-16 text-center">
       <h2 className="text-4xl font-extrabold mb-6 text-[#E0523D]">
-        Join The CollabKaro Movement
+        Join The CollabKaroo Movement
       </h2>
 
       <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-10">

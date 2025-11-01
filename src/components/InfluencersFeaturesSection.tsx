@@ -34,7 +34,7 @@ const FeaturesSection: FC = () => {
     <section className="py-24 bg-white px-6 md:px-16 relative overflow-hidden">
       <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[#FFD580]/10 blur-3xl" />
       <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-900">
-        Why Join CollabKaro?
+        Why Join CollabKaroo?
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
         {features.map((feature, index) => (

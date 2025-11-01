@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-3 max-w-sm cursor-pointer" onClick={() => navigate("/")}>
             <h3 className="text-3xl font-extrabold bg-gradient-to-r from-[#E0523D] via-[#FFD580] to-[#E0523D] bg-clip-text text-transparent">
-              CollabKaro
+              CollabKaroo
             </h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               We connect brands with influencers to build authentic collaborations that drive real impact.
@@ -74,7 +74,7 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="mt-16 border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm gap-3">
-          <p>© {new Date().getFullYear()} CollabKaro. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} CollabKaroo. All rights reserved.</p>
           <p>Designed for creators & brands. ❤️</p>
         </div>
       </div>

@@ -38,7 +38,7 @@ export const AboutHero: FC = () => {
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-white max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-          CollabKaro is where creativity meets purpose. We help creators share
+          CollabKaroo is where creativity meets purpose. We help creators share
           their story while empowering brands to connect authentically—no noise,
           just real influence.
         </p>
